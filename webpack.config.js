@@ -8,13 +8,6 @@ module.exports = {
         filename: 'index_bundle.js'
     },
     mode: 'development',
-    // devServer: {
-    //     contentBase: path.join(__dirname, "dist"),
-    //     compress: true,
-    //     port: 9000,
-    //     watchContentBase: true,
-    //     progress: true
-    // },
     module: {
         rules: [
             {
@@ -27,13 +20,9 @@ module.exports = {
                 use: ["file-loader"]
             },
             {
-                test: /\.scss$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ]
-            }
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+              }
         ]
     },    
     plugins: [
