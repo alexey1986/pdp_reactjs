@@ -16,12 +16,16 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|jpg|gif)$/,
                 use: ["file-loader"]
             },
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.svg$/,
+                use: ['svg-inline-loader']
             }
         ]
     },    

@@ -1,0 +1,9 @@
+.App {
+    font-family: sans-serif;
+    text-align: left;
+  }
+  
+  .App li {
+    padding: 10px;
+    border: 1px solid black;
+  }

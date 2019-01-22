@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import NewsAPI from 'newsapi';
 import { DebounceInput } from 'react-debounce-input';
-import Button from './components/button/button.js';
+import Button from './button.js';
 import Article from './article.js';
 import SelectedArticle from './selected-article.js';
-import './styles.css';
+import './style.css';
 
 const API_KEY = new NewsAPI('204141cf2b5443618d7531afb82b6bac');
 const CATEGORIES = ["business", "entertainment", "general", "health", "science", "sports", "technology"];
@@ -68,17 +68,18 @@ class Articles extends Component {
 
     if (isLoading) {
       return (
-        <div class="spinner">
-          <div class="dot1"></div>
-          <div class="dot2"></div>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
       )
     }
 
     return (
-      <div class="container-fluid">
-        <div class="row">
-          <aside class="col-4">
+      <div className="container-fluid">
+        <div className="row">
+          <aside className="col-4">
             {/* Categories */}
             <h2>Chose category:</h2>
             <div className="btn-group" role="group">
@@ -86,7 +87,7 @@ class Articles extends Component {
             </div>
             {/* Search field */}
             <div className="form-group">
-              <label for="exampleInputEmail1">Search news by key words:</label>
+              <label>Search news by key words:</label>
               <DebounceInput
                 className="form-control"
                 minLength={2}
@@ -102,7 +103,7 @@ class Articles extends Component {
               ))}
             </ul>
           </aside>
-          <div class="col-8">
+          <div className="col-8">
             {article && (
               <SelectedArticle article={article} />
             )}

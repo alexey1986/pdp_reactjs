@@ -1,0 +1,12 @@
+.article-item {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.spinner-border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -1rem;
+  margin-top: -1rem;
+}
