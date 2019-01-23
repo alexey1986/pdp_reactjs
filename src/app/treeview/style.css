@@ -1,0 +1,31 @@
+.node-list-container > .node-list {
+    padding-left: 0
+}
+
+.node-list {
+    list-style: none;
+}
+
+.node-item {
+    padding-left: 10px;
+    position: relative;
+    user-select: none;
+}
+
+.node-icon::before {
+    content: '+';
+    left: 0;
+    position: absolute;
+}
+
+.node-icon:hover {
+    cursor: pointer
+}
+
+.opened::before {
+    content: '-';
+}
+
+.hide {
+    display: none;
+}
