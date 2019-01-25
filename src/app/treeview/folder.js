@@ -7,7 +7,7 @@ class Folder extends Component {
       this.state = {isToggleOn: false};
     }
     
-    handleClick() {
+    toggleNode() {
       this.setState(prevState => ({
         isToggleOn: !prevState.isToggleOn
       }));
@@ -30,11 +30,11 @@ class Folder extends Component {
     }
 
     render() {
-      const { node, children } = this.props;
+      const { node, children, handleClick } = this.props;
   
       return (
-        <li className="node-item clearfix">
-            <div className={"node-icon float-left " + (this.state.isToggleOn ? "opened" : "")} onClick={() => this.handleClick()}>
+        <li className="node-item clearfix" onClick={(e) => handleClick(e, node)}>
+            <div className={"node-icon float-left " + (this.state.isToggleOn ? "opened" : "")} onClick={() => this.toggleNode()}>
                 <IconFolder />
             </div>
             <div className="node-name">{node.name}</div>
