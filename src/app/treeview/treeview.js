@@ -3,21 +3,23 @@ import { treeView } from "./data";
 import File from './file';
 import Folder from './folder';
 import FileTree from './file-tree';
-import SelectedNode from './selected-node';
+import ViewNode from './selected-node';
 import './style.css';
 class TreeView extends Component {
   state = {
-    treeView
+    treeView,
+    selectedNode: null
   };
   
-  selectNode = (e, node) => {
+  selectNode = (e, selected) => {
     e.stopPropagation();
-    // TODO
-
+    this.setState({
+      selectedNode: selected
+    });
   }
 
   render() {
-    const { treeView } = this.state;
+    const { treeView, selectedNode } = this.state;
 
     return (
       <div className="container-fluid">
@@ -27,7 +29,7 @@ class TreeView extends Component {
             <FileTree nodes={treeView.children} handleClick={this.selectNode} />
           </div>
           <div className="col-8">
-            <SelectedNode />
+            <ViewNode node={selectedNode} />
           </div>
         </div>
       </div>

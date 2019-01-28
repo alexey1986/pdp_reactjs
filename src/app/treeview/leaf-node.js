@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
+import IconFile from './icons/file';
+import IconFolder from './icons/folder';
 
 class LeafNode extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {isToggleOn: false};
+    }
+
+    toggleNode() {
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
+    }
 
     render() {
       const { node, handleClick, children } = this.props;
-
-      
-      console.log(this.props);
-
-      console.log(children);
-
-      let icon = null;
-/*
-      let nodeType = null;
+      let nodeIcon = null;
 
       if (node.type === "file") {
-        nodeType = <div>file</div>
+        nodeIcon = <IconFile />
       } else if (node.type === "folder") {
-        (
-          nodeType = <div>
-            folder
-            <ul className="node-list">
-              {node.children && node.children.map((node2, i) => {
-                return <LeafNode key={i + "_node"} node={node2} handleClick={handleClick} />
-              })}
-            </ul>
-            </div>
+        nodeIcon = (
+          <div className={"node-icon float-left " + (this.state.isToggleOn ? "opened" : "")} onClick={() => this.toggleNode()}>
+              <IconFolder />
+          </div>
         )
-      }*/
-      
+      }
 
       return (
         <li className="node-item clearfix" onClick={(e) => handleClick(e, node)}>
+          { nodeIcon }
           <div className="node-name">{node.name}</div>
-          {/* {children} */}
+          { children && (
+            <div className={this.state.isToggleOn ? "" : "hide"}>
+              {children}
+            </div>
+          )}          
         </li>
       );
     }
