@@ -9,6 +9,11 @@ module.exports = {
         filename: 'index_bundle.js'
     },
     mode: 'development',
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: false,
+        port: 9000
+    },
     module: {
         rules: [
             {

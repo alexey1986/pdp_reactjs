@@ -12,13 +12,13 @@ export const treeView = {
             id: 2,
             name: "im file in folder",
             type: "file",
-            content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+            content: "gklajsdlg jasldg kakjsg"
           },
           {
             id: 3,
             name: "im file in folder too",
             type: "file",
-            content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+            content: "gjklasdj gklajsdlg jasldg kakjsg"
           },
           {
             id: 4,
@@ -29,7 +29,7 @@ export const treeView = {
                 id: 5,
                 name: "last file",
                 type: "file",
-                content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+                content: " short description..."
               }
             ]
           }
@@ -50,7 +50,7 @@ export const treeView = {
             id: 8,
             name: "im file in folder too",
             type: "file",
-            content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+            content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg 2222222222"
           },
           {
             id: 9,

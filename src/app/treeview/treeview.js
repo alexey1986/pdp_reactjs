@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { treeView } from "./data";
-import File from './file';
-import Folder from './folder';
 import FileTree from './file-tree';
 import ViewNode from './selected-node';
 import './style.css';
@@ -29,7 +27,7 @@ class TreeView extends Component {
             <FileTree nodes={treeView.children} handleClick={this.selectNode} />
           </div>
           <div className="col-8">
-            <ViewNode node={selectedNode} />
+            {selectedNode && <ViewNode node={selectedNode} />}
           </div>
         </div>
       </div>

@@ -4,64 +4,43 @@ class ViewNode extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            description: "",
-            nameHasChanged: false,
-            descriptionHasChanged: false
+            ...props.node
         };
     }
 
-    handleNameChange(e) {
-        const { value, defaultValue } = e.target, isChanged = (value != defaultValue) ? true : false;
-        this.setState({
-            name: value,
-            nameHasChanged: isChanged
-        })
-    }
-
-    handleDescriptionChange(e) {
-        const { value, defaultValue } = e.target, isChanged = (value != defaultValue) ? true : false;
-        this.setState({
-            description: value,
-            descriptionHasChanged: isChanged
-        })
-    }
-
-    handleSubmit(e) {
-        //e.stopPropagation();
-        e.preventDefault();
-        // TODO
-        //e.target.value
-    }
-
-    handleDelete() {
-        e.preventDefault();
-        // TODO
+    handleChange(e) {
+        console.log(e.target.value)
     }
 
     render() {
         const { node } = this.props;
-        const { nameHasChanged, descriptionHasChanged } = this.state;
-        const hasChanged = nameHasChanged || descriptionHasChanged;
 
         return (
             <div>
                 {node && (
                     <form>
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input type="text" className="form-control-plaintext" onChange={(e) => this.handleNameChange(e)} defaultValue={node.name} />
+                        <div className="form-group row">
+                            <label className="col-sm-1 col-form-label">Name</label>
+                            <div className="col-sm-8">
+                                {node.name}
+                                {/* <input type="text" className="form-control-plaintext" defaultValue={node.name} onChange={(e) => this.handleChange(e)} /> */}
+                            </div>
                         </div>
                         {node.content && (
-                            <div className="form-group">
-                                <label className="">Description</label>
-                                <textarea className="form-control-plaintext" onChange={(e) => this.handleDescriptionChange(e)} defaultValue={node.content} rows="5"></textarea>
+                            <div className="form-group row">
+                                <label className="col-sm-1 col-form-label">Description</label>
+                                <div className="col-sm-8">
+                                    {node.content}
+                                    {/* <textarea className="form-control-plaintext" rows="5" defaultValue={node.content} onChange={(e) => this.handleChange(e)}></textarea> */}
+                                </div>
                             </div>
                         )}
                         <div className="btn-group">
-                            {hasChanged && <button type="button" className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>Save</button>}
-                            <button type="button" className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>Delete</button>
+                            {node.children && <button type="button" className="btn btn-light">Create folder</button>}
+                            {node.children && <button type="button" className="btn btn-light">Create file</button>}
+                            <button type="button" className="btn btn-light">Delete</button>
                         </div>
+                        {/* {(nameHasChanged || descriptionHasChanged) && <button type="button" className="btn btn-primary mr-2" onClick={(e) => this.handleSubmit(e)}>Save</button>} */}
                     </form>
                 )}
             </div>
