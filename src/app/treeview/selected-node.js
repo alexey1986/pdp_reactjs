@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
-class ViewNode extends Component {
+class SelectedNode extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props.node,
-            change: false
+            ...props.node
         };
     }
 
@@ -21,17 +20,11 @@ class ViewNode extends Component {
         this.setState({
             [name]: value
         });
-
-        setTimeout(() => {
-            this.setState({
-                change: this.state.name != this.props.node.name || this.state.description != this.props.node.description
-            });
-         }, 0);
     }
 
     render() {
-        const { node } = this.props;
-        const { change } = this.state;
+        const { node, handleDelete } = this.props;
+        const { name, description } = this.state;
  
         return (
             <div>
@@ -54,8 +47,8 @@ class ViewNode extends Component {
                         <div className="btn-group">
                             {node.children && <button type="button" className="btn btn-light">Create folder</button>}
                             {node.children && <button type="button" className="btn btn-light">Create file</button>}
-                            <button type="button" className="btn btn-light">Delete</button>
-                            {change && <button type="button" className="btn btn-light mr-2">Save</button>}
+                            <button type="button" className="btn btn-light" onClick={() => handleDelete()}>Delete</button>
+                            {(name != node.name || description != node.description) && <button type="button" className="btn btn-light mr-2">Save</button>}
                         </div>
                     </form>
                 )}
@@ -64,4 +57,4 @@ class ViewNode extends Component {
     }
 }
 
-export default ViewNode;
+export default SelectedNode;

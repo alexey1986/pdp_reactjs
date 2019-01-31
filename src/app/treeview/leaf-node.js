@@ -28,13 +28,20 @@ class LeafNode extends Component {
         )
       }
 
+      let childrenList = null;
+      if (children) {
+        childrenList = children
+      } else {
+        childrenList = "empty..."
+      }
+
       return (
         <li className="node-item clearfix" onClick={(e) => handleClick(e, node)}>
           { nodeIcon }
           <div className="node-name">{node.name}</div>
           { children && (
             <div className={this.state.isToggleOn ? "" : "hide"}>
-              {children}
+              {childrenList}
             </div>
           )}          
         </li>

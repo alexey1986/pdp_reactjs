@@ -1,33 +1,27 @@
 export const treeView = {
-    id: 1,
     name: "All tree view",
     type: "root",
     children: [
       {
-        id: 1,
-        name: "im folder",
+        name: "im folder 1",
         type: "folder",
         children: [
           {
-            id: 2,
-            name: "im file in folder",
+            name: "im file 1 in folder 1",
             type: "file",
             description: "gklajsdlg jasldg kakjsg"
           },
           {
-            id: 3,
-            name: "im file in folder too",
+            name: "im file 2 in folder 1",
             type: "file",
             description: "gjklasdj gklajsdlg jasldg kakjsg"
           },
           {
-            id: 4,
-            name: "im folder in folder",
+            name: "im folder 2 in folder 1",
             type: "folder",
             children: [
               {
-                id: 5,
-                name: "last file",
+                name: "last file in folder 3",
                 type: "file",
                 description: " short description..."
               }
@@ -36,36 +30,30 @@ export const treeView = {
         ]
       },
       {
-        id: 6,
-        name: "im folder",
+        name: "im folder 2",
         type: "folder",
         children: [
           {
-            id: 7,
-            name: "im file in folder",
+            name: "im file 1 in folder 2",
             type: "file",
             description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
           },
           {
-            id: 8,
-            name: "im file in folder too",
+            name: "im file 2 in folder 2",
             type: "file",
             description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg 2222222222"
           },
           {
-            id: 9,
-            name: "im folder in folder",
+            name: "im folder 2 in folder 2",
             type: "folder",
             children: [
               {
-                id: 10,
-                name: "Im file",
+                name: "Im file 1 in folder 4",
                 type: "file",
                 description: " ajshf kjasfh kjasf hkasfh kjash kgahsk gkjas"
               },
               {
-                id: 11,
-                name: "Im file too",
+                name: "Im file 2 in folder 4",
                 type: "file",
                 description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
               }
