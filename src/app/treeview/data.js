@@ -12,13 +12,13 @@ export const treeView = {
             id: 2,
             name: "im file in folder",
             type: "file",
-            content: "gklajsdlg jasldg kakjsg"
+            description: "gklajsdlg jasldg kakjsg"
           },
           {
             id: 3,
             name: "im file in folder too",
             type: "file",
-            content: "gjklasdj gklajsdlg jasldg kakjsg"
+            description: "gjklasdj gklajsdlg jasldg kakjsg"
           },
           {
             id: 4,
@@ -29,7 +29,7 @@ export const treeView = {
                 id: 5,
                 name: "last file",
                 type: "file",
-                content: " short description..."
+                description: " short description..."
               }
             ]
           }
@@ -44,13 +44,13 @@ export const treeView = {
             id: 7,
             name: "im file in folder",
             type: "file",
-            content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+            description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
           },
           {
             id: 8,
             name: "im file in folder too",
             type: "file",
-            content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg 2222222222"
+            description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg 2222222222"
           },
           {
             id: 9,
@@ -61,13 +61,13 @@ export const treeView = {
                 id: 10,
                 name: "Im file",
                 type: "file",
-                content: " ajshf kjasfh kjasf hkasfh kjash kgahsk gkjas"
+                description: " ajshf kjasfh kjasf hkasfh kjash kgahsk gkjas"
               },
               {
                 id: 11,
                 name: "Im file too",
                 type: "file",
-                content: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+                description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
               }
             ]
           }

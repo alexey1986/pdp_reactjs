@@ -4,17 +4,35 @@ class ViewNode extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props.node
+            ...props.node,
+            change: false
         };
     }
 
-    handleChange(e) {
-        console.log(e.target.value)
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            name: nextProps.node.name,
+            description: nextProps.node.description
+        });
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+
+        setTimeout(() => {
+            this.setState({
+                change: this.state.name != this.props.node.name || this.state.description != this.props.node.description
+            });
+         }, 0);
     }
 
     render() {
         const { node } = this.props;
-
+        const { change } = this.state;
+ 
         return (
             <div>
                 {node && (
@@ -22,16 +40,14 @@ class ViewNode extends Component {
                         <div className="form-group row">
                             <label className="col-sm-1 col-form-label">Name</label>
                             <div className="col-sm-8">
-                                {node.name}
-                                {/* <input type="text" className="form-control-plaintext" defaultValue={node.name} onChange={(e) => this.handleChange(e)} /> */}
+                                <input type="text" className="form-control-plaintext" name="name" value={this.state.name} onChange={(e) => this.handleChange(e)} />
                             </div>
                         </div>
-                        {node.content && (
+                        {node.description && (
                             <div className="form-group row">
                                 <label className="col-sm-1 col-form-label">Description</label>
                                 <div className="col-sm-8">
-                                    {node.content}
-                                    {/* <textarea className="form-control-plaintext" rows="5" defaultValue={node.content} onChange={(e) => this.handleChange(e)}></textarea> */}
+                                    <textarea className="form-control-plaintext" rows="1" name="description" value={this.state.description} onChange={(e) => this.handleChange(e)}></textarea>
                                 </div>
                             </div>
                         )}
@@ -39,8 +55,8 @@ class ViewNode extends Component {
                             {node.children && <button type="button" className="btn btn-light">Create folder</button>}
                             {node.children && <button type="button" className="btn btn-light">Create file</button>}
                             <button type="button" className="btn btn-light">Delete</button>
+                            {change && <button type="button" className="btn btn-light mr-2">Save</button>}
                         </div>
-                        {/* {(nameHasChanged || descriptionHasChanged) && <button type="button" className="btn btn-primary mr-2" onClick={(e) => this.handleSubmit(e)}>Save</button>} */}
                     </form>
                 )}
             </div>
