@@ -12,7 +12,11 @@
     user-select: none;
 }
 
-.node-icon::before {
+.node-icon {
+    margin-right: 3px;
+}
+
+.node-icon:not(.empty)::before {
     content: '+';
     left: 0;
     position: absolute;
@@ -22,7 +26,7 @@
     cursor: pointer
 }
 
-.opened::before {
+.opened:not(.empty)::before {
     content: '-';
 }
 

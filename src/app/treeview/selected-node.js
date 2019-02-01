@@ -10,6 +10,7 @@ class SelectedNode extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
+            id: nextProps.node.id,
             name: nextProps.node.name,
             description: nextProps.node.description
         });
@@ -23,9 +24,9 @@ class SelectedNode extends Component {
     }
 
     render() {
-        const { node, handleDelete } = this.props;
-        const { name, description } = this.state;
- 
+        const { node, handleDelete, handleSave } = this.props;
+        const { id, name, description } = this.state;
+
         return (
             <div>
                 {node && (
@@ -48,7 +49,7 @@ class SelectedNode extends Component {
                             {node.children && <button type="button" className="btn btn-light">Create folder</button>}
                             {node.children && <button type="button" className="btn btn-light">Create file</button>}
                             <button type="button" className="btn btn-light" onClick={() => handleDelete()}>Delete</button>
-                            {(name != node.name || description != node.description) && <button type="button" className="btn btn-light mr-2">Save</button>}
+                            {(name != node.name || description != node.description) && <button type="button" className="btn btn-light mr-2" onClick={() => handleSave(id, name, description)}>Save</button>}
                         </div>
                     </form>
                 )}
