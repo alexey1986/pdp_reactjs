@@ -65,17 +65,27 @@ class TreeView extends Component {
 
   handleCreate(id, newNodeType, newNodeName, newNodeDescription) {
     const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
+    let template;
+    // TODO import templates returns object    
 
-    // TODO import templates returns object
-
-    
-
-    currentNode.children.push({
+    if (newNodeType == "file") {
+      template = {
         id: Math.random().toString(36).substr(2, 9),
         name: newNodeName,
         type: newNodeType,
-        description: newNodeDescription
-    });
+        description: newNodeDescription,
+        aliaksei: "its me"
+      }
+    } else if (newNodeType == "folder") {
+      template = {
+        id: Math.random().toString(36).substr(2, 9),
+        name: newNodeName,
+        type: newNodeType,
+        children: []
+      }
+    }
+
+    currentNode.children.push(template);
     this.updateTree(newArray);
   }
 

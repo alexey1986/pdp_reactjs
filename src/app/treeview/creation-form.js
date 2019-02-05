@@ -27,7 +27,7 @@ class CreationForm extends Component {
         name == "name" && value && this.setState({isNodeValid: true});
     }
 
-    handleSubmit(id, name, description) {
+    handleSubmit(id, type, name, description) {
         const { handleSubmit } = this.props;
         // Validate name
         if (!name) {
@@ -35,7 +35,7 @@ class CreationForm extends Component {
             return;
         }
 
-        handleSubmit(id, name, description)
+        handleSubmit(id, type, name, description);
     }
 
 

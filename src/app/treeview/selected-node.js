@@ -38,8 +38,8 @@ class SelectedNode extends Component {
     }
 
     handleSubmit(id, type, name, description) {
-        this.setNodeType(null);
         this.props.handleCreate(id, type, name, description);
+        this.setNodeType(null);
     }
 
     render() {
