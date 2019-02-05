@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { treeView } from "./data";
+import nodeModel from "./models/node-model";
 import FileTree from './file-tree';
 import SelectedNode from './selected-node';
 import './style.css';
@@ -12,6 +13,21 @@ class TreeView extends Component {
     };
     this.handleSave = this.handleSave.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
+  }
+
+  componentDidMount() {
+    const tree = this.getFromLocalStorage();
+    tree && this.setState({
+      treeView: tree
+    })
+  }
+  
+  selectNode = (e, selected) => {
+    e.stopPropagation();
+    this.setState({
+      selectedNode: selected
+    });
   }
 
   findNode(array, nodeId) {
@@ -25,29 +41,53 @@ class TreeView extends Component {
       }
     }
   }
-  
-  selectNode = (e, selected) => {
-    e.stopPropagation();
-    this.setState({
-      selectedNode: selected
-    });
+
+  saveToLocalStorage() {
+    localStorage.setItem('treeView', JSON.stringify(this.state.treeView));    
+  }
+
+  getFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('treeView'));
+  }
+
+  updateTree(newTree) {
+    this.setState({treeView: newTree},
+      this.saveToLocalStorage
+    );
   }
 
   handleSave(id, name, description) {
-    const newArray = this.state.treeView, node_ = this.findNode(newArray.children, id);
-    node_.name = name;
-    node_.description = description;
-    this.setState({
-      treeView: newArray
+    const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
+    currentNode.name = name;
+    currentNode.description = description;
+    this.updateTree(newArray);
+  }
+
+  handleCreate(id, newNodeType, newNodeName, newNodeDescription) {
+    const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
+
+    // TODO import templates returns object
+
+    
+
+    currentNode.children.push({
+        id: Math.random().toString(36).substr(2, 9),
+        name: newNodeName,
+        type: newNodeType,
+        description: newNodeDescription
     });
+    this.updateTree(newArray);
   }
 
   handleDelete() {
     const { treeView, selectedNode } = this.state;
-    this.setState({
-      treeView: this.removeNode(treeView, selectedNode.id),
-      selectedNode: null
-    });
+    this.setState(
+      {
+        treeView: this.removeNode(treeView, selectedNode.id),
+        selectedNode: null
+      },
+      this.saveToLocalStorage
+    )
   }
 
   removeNode(parent, childToRemove) {
@@ -70,7 +110,11 @@ class TreeView extends Component {
             <FileTree nodes={treeView.children} handleClick={this.selectNode} />
           </div>
           <div className="col-8">
-            {selectedNode && <SelectedNode node={selectedNode} handleDelete={this.handleDelete} handleSave={this.handleSave} /> || <p>please select some...</p>}
+            {selectedNode && <SelectedNode
+              node={selectedNode}
+              handleDelete={this.handleDelete}
+              handleSave={this.handleSave}
+              handleCreate={this.handleCreate} /> || <p>please select some...</p>}
           </div>
         </div>
       </div>
