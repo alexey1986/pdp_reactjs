@@ -24,18 +24,16 @@ class LeafNode extends Component {
         nodeIcon = <IconFile />
       } else if (node.type === "folder") {
         nodeIcon = (
-          <div className={"node-icon" + (this.state.isToggleOn ? " opened" : "") + (!numberOfChildren ? " empty" : "")} onClick={() => this.toggleNode()}>
+          <div className={"node-icon float-left" + (this.state.isToggleOn ? " opened" : "") + (!numberOfChildren ? " empty" : "")} onClick={() => this.toggleNode()}>
               <IconFolder />
           </div>
         )
       }
 
       return (
-        <li className="node-item clearfix" onClick={(e) => handleClick(e, node)}>
-          <div className="d-flex">
-            { nodeIcon }
-            <div className="node-name">{node.name}</div>
-          </div>
+        <li className="node-item clearfix">
+          { nodeIcon }
+          <div className="node-name d-inline-block" onClick={(e) => handleClick(e, node)}>{node.name}</div>
           { children && (
             <div className={this.state.isToggleOn ? "" : "hide"}>
               {children}

@@ -21,6 +21,24 @@ class TreeView extends Component {
     tree && this.setState({
       treeView: tree
     })
+
+
+    
+    // TODO
+
+    // let maches = [];
+
+    // function getNodeName(array) {
+    //     for (var i = 0; i < array.length; i++) {
+    //       maches.push(array[i].name)
+    //       if (array[i].children) {
+    //         getNodeName(array[i].children)
+    //       }
+    //     }
+
+        
+    // }
+    // console.log( getNodeName(this.state.treeView.children))
   }
   
   selectNode = (e, selected) => {
@@ -50,6 +68,10 @@ class TreeView extends Component {
     return JSON.parse(localStorage.getItem('treeView'));
   }
 
+  generateUniqueIdNumber() {
+    return Math.random().toString(36).substr(2, 9);
+  }
+
   updateTree(newTree) {
     this.setState({treeView: newTree},
       this.saveToLocalStorage
@@ -65,26 +87,12 @@ class TreeView extends Component {
 
   handleCreate(id, newNodeType, newNodeName, newNodeDescription) {
     const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
-    let template;
-    // TODO import templates returns object    
-
-    if (newNodeType == "file") {
-      template = {
-        id: Math.random().toString(36).substr(2, 9),
-        name: newNodeName,
-        type: newNodeType,
-        description: newNodeDescription,
-        aliaksei: "its me"
-      }
-    } else if (newNodeType == "folder") {
-      template = {
-        id: Math.random().toString(36).substr(2, 9),
-        name: newNodeName,
-        type: newNodeType,
-        children: []
-      }
-    }
-
+    let template = {
+      id: this.generateUniqueIdNumber(),
+      name: newNodeName,
+      type: newNodeType,
+      [newNodeType == "file" ? 'description' : 'children']: newNodeType == "file" ? newNodeDescription : []
+    };
     currentNode.children.push(template);
     this.updateTree(newArray);
   }

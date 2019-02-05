@@ -6,7 +6,7 @@ class SelectedNode extends Component {
         super(props);
         this.state = {
             ...props.node,
-            nodeType: null,
+            newNodeType: null,
             newNodeName: "",
             newNodeDescription: ""
         };
@@ -18,7 +18,7 @@ class SelectedNode extends Component {
             id: nextProps.node.id,
             name: nextProps.node.name,
             description: nextProps.node.description,
-            nodeType: null,
+            newNodeType: null,
             newNodeName: "",
             newNodeDescription: ""
         });
@@ -33,7 +33,7 @@ class SelectedNode extends Component {
 
     setNodeType(type) {
         this.setState({
-            nodeType: type
+            newNodeType: type
         });
     }
 
@@ -44,7 +44,8 @@ class SelectedNode extends Component {
 
     render() {
         const { node, handleDelete, handleSave } = this.props;
-        const { id, name, description, nodeType } = this.state;
+        const { id, name, description, newNodeType } = this.state;
+        const isNodeFile = node.type == "file";
 
         return (
             <div>
@@ -58,7 +59,7 @@ class SelectedNode extends Component {
                                 </div>
                             </div>
 
-                            {node.description && (
+                            {isNodeFile && (
                                 <div className="form-group row">
                                     <label className="col-sm-1 col-form-label">Description</label>
                                     <div className="col-sm-8">
@@ -74,7 +75,7 @@ class SelectedNode extends Component {
                                 {(name != node.name || description != node.description) && <button type="button" className="btn btn-light mr-2" onClick={() => handleSave(id, name, description)}>Save</button>}
                             </div>
                         </form>
-                        {nodeType && <CreationForm type={nodeType} id={id} handleSubmit={this.handleSubmit} />}
+                        {newNodeType && <CreationForm type={newNodeType} id={id} handleSubmit={this.handleSubmit} />}
                     </div>
                 )}
             </div>
