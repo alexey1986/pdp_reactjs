@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { treeView } from "./data";
-import nodeModel from "./models/node-model";
 import FileTree from './file-tree';
 import SelectedNode from './selected-node';
 import './style.css';

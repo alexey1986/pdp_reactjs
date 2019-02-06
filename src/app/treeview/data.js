@@ -4,29 +4,29 @@ export const treeView = {
     children: [
       {
         id: "1",
-        name: "im folder 1",
+        name: "Folder 1",
         type: "folder",
         children: [
           {
             id: "3",
-            name: "im file 1 in folder 1",
+            name: "File 1",
             type: "file",
-            description: "gklajsdlg jasldg kakjsg"
+            description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
           },
           {
             id: "4",
-            name: "im file 2 in folder 1",
+            name: "File 2",
             type: "file",
-            description: "gjklasdj gklajsdlg jasldg kakjsg"
+            description: "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
           },
           {
             id: "5",
-            name: "im folder 2 in folder 1",
+            name: "Folder 3",
             type: "folder",
             children: [
               {
                 id: "9",
-                name: "last file in folder 3",
+                name: "File 3",
                 type: "file",
                 description: " short description..."
               }
@@ -36,37 +36,37 @@ export const treeView = {
       },
       {
         id: "2",
-        name: "im folder 2",
+        name: "Folder 2",
         type: "folder",
         children: [
           {
             id: "6",
-            name: "im file 1 in folder 2",
+            name: "File 4",
             type: "file",
-            description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+            description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
           },
           {
             id: "7",
-            name: "im file 2 in folder 2",
+            name: "File 5",
             type: "file",
-            description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg 2222222222"
+            description: "At vero eos et accusam et justo duo dolores et ea rebum"
           },
           {
             id: "8",
-            name: "im folder 2 in folder 2",
+            name: "Folder 4",
             type: "folder",
             children: [
               {
                 id: "10",
-                name: "Im file 1 in folder 4",
+                name: "File 6",
                 type: "file",
-                description: " ajshf kjasfh kjasf hkasfh kjash kgahsk gkjas"
+                description: ""
               },
               {
                 id: "11",
-                name: "Im file 2 in folder 4",
+                name: "File 7",
                 type: "file",
-                description: " asdgkj lasd gjklasdj gklajsdlg jasldg kakjsg"
+                description: ""
               }
             ]
           }
