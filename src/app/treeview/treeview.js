@@ -21,24 +21,6 @@ class TreeView extends Component {
     tree && this.setState({
       treeView: tree
     })
-
-
-    
-    // TODO
-
-    // let maches = [];
-
-    // function getNodeName(array) {
-    //     for (var i = 0; i < array.length; i++) {
-    //       maches.push(array[i].name)
-    //       if (array[i].children) {
-    //         getNodeName(array[i].children)
-    //       }
-    //     }
-
-        
-    // }
-    // console.log( getNodeName(this.state.treeView.children))
   }
   
   selectNode = (e, selected) => {

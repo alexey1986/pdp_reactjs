@@ -22,18 +22,18 @@ class SelectedNode extends Component {
             newNodeName: "",
             newNodeDescription: ""
         });
+    }   
+
+    setNodeType(type) {
+        this.setState({
+            newNodeType: type
+        });
     }
 
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({
             [name]: value
-        });
-    }
-
-    setNodeType(type) {
-        this.setState({
-            newNodeType: type
         });
     }
 
