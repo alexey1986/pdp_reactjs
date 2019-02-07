@@ -55,9 +55,9 @@ class SelectedNode extends Component {
                     {isEditing && <EditForm node={node} handleSave={handleSave} handleDelete={handleDelete} setNodeType={this.setNodeType} />}
                     {newNodeType && <CreationForm type={newNodeType} id={id} handleSubmit={this.handleSubmit} />}
                     <ButtonGroup>
-                        {node.children && <Button color="light" onClick={() => this.setNodeType("folder")}>Create folder</Button>}
-                        {node.children && <Button color="light" onClick={() => this.setNodeType("file")}>Create file</Button>}
-                        {!isEditing && <Button color="light" onClick={() => this.setState({isEditing: !isEditing})}>Edit</Button>}
+                        {(node.children && !isEditing) && <Button color="light" onClick={() => this.setNodeType("folder")}>Create folder</Button>}
+                        {(node.children && !isEditing) && <Button color="light" onClick={() => this.setNodeType("file")}>Create file</Button>}
+                        {(!isEditing && !newNodeType) && <Button color="light" onClick={() => this.setState({isEditing: !isEditing})}>Edit</Button>}
                         {(isEditing || newNodeType) && <Button color="light" onClick={() => this.handleCancel()}>Cancel</Button>}
                         <Button color="light" onClick={() => handleDelete()}>Delete</Button>
                     </ButtonGroup>

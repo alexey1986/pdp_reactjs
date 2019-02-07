@@ -27,7 +27,7 @@ class EditForm extends Component {
                 <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeName">Name</Label>
                     <Input className="col-sm-8 mr-3" type="text" name="name" id="NodeName" placeholder="Please enter name..." value={name} onChange={(e) => this.handleChange(e)} />
-                    {(name != node.name || description != node.description) && <Button color="primary" onClick={() => handleSave(id, name, description)}>Save</Button>}
+                    {(name && (name != node.name || description != node.description)) && <Button color="primary" onClick={() => handleSave(id, name, description)}>Save</Button>}
                 </FormGroup>
                 {node.type == "file" && <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeDscription">Description</Label>

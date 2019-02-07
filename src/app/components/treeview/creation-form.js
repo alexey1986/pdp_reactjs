@@ -16,7 +16,7 @@ class CreationForm extends Component {
         if (this.props.type !== prevProps.type) {
           this.setState({isNodeValid: true})
         }
-      }
+    }
 
     handleChange(event) {
         const { name, value } = event.target;
