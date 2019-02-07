@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './components/nav/nav.js';
-import Articles from './articles/articles-list.js';
-import TreeView from './treeview/treeview.js';
+import Articles from './components/articles/articles-list.js';
+import TreeView from './components/treeview/treeview.js';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
