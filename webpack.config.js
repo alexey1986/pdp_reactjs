@@ -5,14 +5,14 @@ const webpack = require('webpack');
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.join(__dirname, '/dist'),
+        path: path.join(__dirname, '/docs'),
         filename: 'index_bundle.js'
     },
     mode: 'development',
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'docs'),
         compress: false,
-        port: 9000
+        port: 3000
     },
     module: {
         rules: [
