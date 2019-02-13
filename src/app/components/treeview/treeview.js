@@ -38,7 +38,7 @@ class TreeView extends Component {
     try {
       localStorage.setItem('treeView', JSON.stringify(this.state.treeView));
     } catch(e) {
-      if (this.isQuotaExceeded(e)) {
+      if (this.isStorageExceeded(e)) {
         console.error("Storage full, maybe notify user or do some clean-up");
       }
     }
