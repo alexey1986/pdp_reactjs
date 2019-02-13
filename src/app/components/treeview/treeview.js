@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { treeView } from "./data";
 import FileTree from './file-tree';
 import SelectedNode from './selected-node';
-import './style.css';
+import '../assets/styles/components/treeview.css';
+
 class TreeView extends Component {
   constructor(props) {
     super(props);
@@ -10,23 +11,15 @@ class TreeView extends Component {
       treeView,
       selectedNode: null
     };
-    this.handleSave = this.handleSave.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleCreate = this.handleCreate.bind(this);
   }
+
+  // TODO add reset button or add folder into root
 
   componentDidMount() {
     const tree = this.getFromLocalStorage();
     tree && this.setState({
       treeView: tree
     })
-  }
-  
-  selectNode = (e, selected) => {
-    e.stopPropagation();
-    this.setState({
-      selectedNode: selected
-    });
   }
 
   findNode(array, nodeId) {
@@ -42,11 +35,46 @@ class TreeView extends Component {
   }
 
   saveToLocalStorage() {
-    localStorage.setItem('treeView', JSON.stringify(this.state.treeView));    
+    try {
+      localStorage.setItem('treeView', JSON.stringify(this.state.treeView));
+    } catch(e) {
+      if (this.isQuotaExceeded(e)) {
+        console.error("Storage full, maybe notify user or do some clean-up");
+      }
+    }
   }
 
   getFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('treeView'));
+    try {
+      if (window.localStorage) {
+        return JSON.parse(localStorage.getItem('treeView'));
+      }
+    } catch(e) {
+        console.error("Access denied");
+    }
+  }
+
+  isStorageExceeded(e) {
+    var storageExceeded = false;
+    if (e) {
+      if (e.code) {
+        switch (e.code) {
+          case 22:
+          storageExceeded = true;
+            break;
+          case 1014:
+            // Firefox
+            if (e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+              storageExceeded = true;
+            }
+            break;
+        }
+      } else if (e.number === -2147024882) {
+        // Internet Explorer 8
+        storageExceeded = true;
+      }
+    }
+    return storageExceeded;
   }
 
   generateUniqueIdNumber() {
@@ -58,15 +86,22 @@ class TreeView extends Component {
       this.saveToLocalStorage
     );
   }
+  
+  handleSelectNode = (e, selected) => {
+    e.stopPropagation();
+    this.setState({
+      selectedNode: selected
+    });
+  }
 
-  handleSave(id, name, description) {
+  handleSave = (id, name, description) => {
     const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
     currentNode.name = name;
     currentNode.description = description;
     this.updateTree(newArray);
   }
 
-  handleCreate(id, newNodeType, newNodeName, newNodeDescription) {
+  handleCreate = (id, newNodeType, newNodeName, newNodeDescription) => {
     const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
     let template = {
       id: this.generateUniqueIdNumber(),
@@ -78,7 +113,7 @@ class TreeView extends Component {
     this.updateTree(newArray);
   }
 
-  handleDelete() {
+  handleDelete = () => {
     const { treeView, selectedNode } = this.state;
     this.setState(
       {
@@ -106,7 +141,7 @@ class TreeView extends Component {
         <h1>Tree view with files and folders</h1>
         <div className="row">
           <div className="col-4 node-list-container">
-            <FileTree nodes={treeView.children} handleClick={this.selectNode} />
+            <FileTree nodes={treeView.children} handleClick={this.handleSelectNode} />
           </div>
           <div className="col-8">
             {selectedNode && <SelectedNode

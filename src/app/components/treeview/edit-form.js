@@ -11,11 +11,20 @@ class EditForm extends Component {
         }
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        const { id, name, description } = this.state, { handleSave } = this.props;
+
+
+        handleSave(id, name, description)
     }
 
     render() {
@@ -23,15 +32,15 @@ class EditForm extends Component {
         const { id, name, description } = this.state;
 
         return (
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeName">Name</Label>
-                    <Input className="col-sm-8 mr-3" type="text" name="name" id="NodeName" placeholder="Please enter name..." value={name} onChange={(e) => this.handleChange(e)} />
-                    {(name && (name != node.name || description != node.description)) && <Button color="primary" onClick={() => handleSave(id, name, description)}>Save</Button>}
+                    <Input className="col-sm-8 mr-3" type="text" name="name" id="NodeName" placeholder="Please enter name..." value={name} onChange={this.handleChange} />
+                    {(name && (name != node.name || description != node.description)) && <Button color="primary">Save</Button>}
                 </FormGroup>
                 {node.type == "file" && <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeDscription">Description</Label>
-                    <Input className="col-sm-8" type="textarea" name="description" id="NodeDscription" placeholder="Please enter description..." value={description} onChange={(e) => this.handleChange(e)} />
+                    <Input className="col-sm-8" type="textarea" name="description" id="NodeDscription" placeholder="Please enter description..." value={description} onChange={this.handleChange} />
                 </FormGroup>}
             </Form>
         )

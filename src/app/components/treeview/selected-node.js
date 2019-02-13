@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EditForm from './edit-form';
 import CreationForm from './creation-form';
 import { Button, ButtonGroup } from 'reactstrap';
+
 class SelectedNode extends Component {
     constructor(props) {
         super(props);
@@ -10,9 +11,6 @@ class SelectedNode extends Component {
             newNodeType: null,
             isEditing: false
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.setNodeType = this.setNodeType.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -25,18 +23,19 @@ class SelectedNode extends Component {
         });
     }
 
-    setNodeType(type) {
+    setNodeType = (type) => {
         this.setState({
             newNodeType: type
         });
     }
 
-    handleSubmit(id, type, name, description) {
+    handleSubmit = (id, type, name, description) => {
+        //console.log("handleSubmit: ", id, type, name, description)
         this.props.handleCreate(id, type, name, description);
         this.setNodeType(null);
     }
 
-    handleCancel() {
+    handleCancel = () => {
         this.setState({
             newNodeType: null,
             isEditing: false

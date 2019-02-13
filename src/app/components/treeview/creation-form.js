@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
+
 class CreationForm extends Component {
     constructor(props) {
         super(props);
@@ -12,23 +13,22 @@ class CreationForm extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        /// rese validation
+        /// reset validation
         if (this.props.type !== prevProps.type) {
           this.setState({isNodeValid: true})
         }
     }
-
-    handleChange(event) {
+    
+    handleChange = (event) => {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
         // Validate name
         name == "name" && value && this.setState({isNodeValid: true});
+        this.setState({[name]: value});
     }
 
-    handleSubmit(id, type, name, description) {
-        const { handleSubmit } = this.props;
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const { type, handleSubmit } = this.props, { id, name, description, isNodeValid } = this.state;
         // Validate name
         if (!name) {
             this.setState({isNodeValid: false});
@@ -38,24 +38,23 @@ class CreationForm extends Component {
         handleSubmit(id, type, name, description);
     }
 
-
     render() {
         const { type } = this.props, { id, name, description, isNodeValid } = this.state;
 
         return (
             <fieldset className="mb-4">
                 <legend>Set new {type} name</legend>
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <FormGroup row>
                         <div className="col-8">
-                            <Input className={(!isNodeValid ? " is-invalid" : "")} type="text" name="name" id="NodeName" placeholder="Please enter name..." value={name} onChange={(e) => this.handleChange(e)} />
+                            <Input className={(!isNodeValid ? " is-invalid" : "")} type="text" name="name" id="NodeName" placeholder="Please enter name..." value={name} onChange={this.handleChange} />
                         </div>
-                        {(name || description) && <Button color="primary" onClick={() => this.handleSubmit(id, type, name, description)}>Submit</Button>}
+                        {(name || description) && <Button color="primary">Submit</Button>}
                         {!isNodeValid && <div className="invalid-feedback">Please enter name</div>}
                     </FormGroup>
                     {type == "file" && (
                         <FormGroup>
-                            <Input className="col-8" type="textarea" name="description" placeholder="Please enter description..." value={description} onChange={(e) => this.handleChange(e)} />
+                            <Input className="col-8" type="textarea" name="description" placeholder="Please enter description..." value={description} onChange={this.handleChange} />
                         </FormGroup>
                     )}                
                 </Form>

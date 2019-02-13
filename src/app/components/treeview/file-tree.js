@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LeafNode from './leaf-node';
+
 class FileTree extends Component {
-    render() {
-      const { nodes, handleClick } = this.props;
-      let count = 0;
+  render() {
+    const { nodes, handleClick } = this.props;
 
-      return (
-        <ul className="node-list">
-          {nodes.map((node, i) => {
-            if (node.children) {
-              count = node.children.length;
-            }
-            return (
-              <LeafNode key={i + "_node"} node={node} handleClick={handleClick} numberOfChildren={count}>
-                { node.children && <FileTree nodes={node.children} handleClick={handleClick} numberOfChildren={count} /> }
-              </LeafNode>
-            )
-          })}
-        </ul>
-      );
-    }
+    return (
+      <ul className="node-list">
+        {nodes.map((node, i) => {
+          return (
+            <LeafNode key={i + "_node"} node={node} handleClick={handleClick}>
+              <FileTree nodes={node.children} handleClick={handleClick} />
+            </LeafNode>
+          )
+        })}
+      </ul>
+    );
   }
+}
 
-  export default FileTree;
+FileTree.propTypes = {
+  nodes: PropTypes.array
+}
+
+FileTree.defaultProps = {
+  nodes: []
+};
+
+export default FileTree;
