@@ -13,9 +13,13 @@ class CreationForm extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        /// reset validation
+        /// reset validation and fields values
         if (this.props.type !== prevProps.type) {
-          this.setState({isNodeValid: true})
+            this.setState({
+                name: "",
+                description: "",
+                isNodeValid: true
+            })
         }
     }
     
@@ -28,7 +32,7 @@ class CreationForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const { type, handleSubmit } = this.props, { id, name, description, isNodeValid } = this.state;
+        const { type, handleSubmit } = this.props, { id, name, description } = this.state;
         // Validate name
         if (!name) {
             this.setState({isNodeValid: false});

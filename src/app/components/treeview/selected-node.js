@@ -30,7 +30,6 @@ class SelectedNode extends Component {
     }
 
     handleSubmit = (id, type, name, description) => {
-        //console.log("handleSubmit: ", id, type, name, description)
         this.props.handleCreate(id, type, name, description);
         this.setNodeType(null);
     }
@@ -51,7 +50,7 @@ class SelectedNode extends Component {
                 {node && <div>
                     <h3>{node.name}</h3>
                     <p>{node.description}</p>
-                    {isEditing && <EditForm node={node} handleSave={handleSave} handleDelete={handleDelete} setNodeType={this.setNodeType} />}
+                    {isEditing && <EditForm node={node} handleSave={handleSave} />}
                     {newNodeType && <CreationForm type={newNodeType} id={id} handleSubmit={this.handleSubmit} />}
                     <ButtonGroup>
                         {(node.children && !isEditing) && <Button color="light" onClick={() => this.setNodeType("folder")}>Create folder</Button>}
