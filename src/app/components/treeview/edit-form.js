@@ -1,9 +1,9 @@
-import React, { component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 // TODO use PureComponent instead
-class EditForm extends component {
+class EditForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,14 +32,13 @@ class EditForm extends component {
 
     render() {
         const { node } = this.props;
-        const { name, description, cansave } = this.state;
 
         return (
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeName">Name</Label>
                     <Input className="col-sm-8 mr-3" type="text" name="name" id="NodeName" placeholder="Please enter name..." defaultValue={node.name} onChange={this.handleChange} />
-                    {cansave && <Button color="primary">Save</Button>}
+                    {this.state.cansave && <Button color="primary">Save</Button>}
                 </FormGroup>
                 {node.type == "file" && <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeDscription">Description</Label>

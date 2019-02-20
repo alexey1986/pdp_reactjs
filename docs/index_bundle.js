@@ -48274,14 +48274,9 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function (event) {
       event.preventDefault();
-      var _this$props = _this.props,
-          type = _this$props.type,
-          handleSubmit = _this$props.handleSubmit,
-          _this$state = _this.state,
-          id = _this$state.id,
+      var _this$state = _this.state,
           name = _this$state.name,
-          description = _this$state.description,
-          isNodeValid = _this$state.isNodeValid; // Validate name
+          description = _this$state.description; // Validate name
 
       if (!name) {
         _this.setState({
@@ -48292,11 +48287,10 @@ function (_Component) {
       } // save
 
 
-      handleSubmit(id, type, name, description);
+      _this.props.handleSubmit(name, description);
     });
 
     _this.state = {
-      id: _this.props.id,
       name: "",
       description: "",
       isNodeValid: true
@@ -48307,9 +48301,11 @@ function (_Component) {
   _createClass(CreationForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      /// reset validation
-      if (this.props.type !== prevProps.type) {
+      /// reset validation and fields values
+      if (this.props.nodeType !== prevProps.nodeType) {
         this.setState({
+          name: "",
+          description: "",
           isNodeValid: true
         });
       }
@@ -48317,15 +48313,14 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var type = this.props.type,
+      var nodeType = this.props.nodeType,
           _this$state2 = this.state,
-          id = _this$state2.id,
           name = _this$state2.name,
           description = _this$state2.description,
           isNodeValid = _this$state2.isNodeValid;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
         className: "mb-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", null, "Set new ", type, " name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", null, "Set new ", nodeType, " name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
         row: true
@@ -48343,7 +48338,7 @@ function (_Component) {
         color: "primary"
       }, "Submit"), !isNodeValid && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "invalid-feedback"
-      }, "Please enter name")), type == "file" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+      }, "Please enter name")), nodeType == "file" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         className: "col-8",
         type: "textarea",
         name: "description",
@@ -48431,6 +48426,41 @@ var treeView = {
     }]
   }]
 };
+/*
+var tree = {
+  root: {
+    name: 'asdasd',
+    type: 'folder',
+    description: dataId,
+    children: [
+      'id2',
+      'id2',
+    ],
+  },
+  id1: {
+    name: 'asdasd',
+    type: 'folder',
+    description: 'sdfsdfsd',
+    children: [
+      'id2',
+      'id2',
+    ],
+  },
+  id2: {
+    name: 'asdasd',
+    type: 'folder',
+    description: 'sdfsdfsd',
+    children: [
+      'id4',
+      'id6',
+    ],
+  },
+  id3: {
+    name: 'asdasd',
+    type: 'file',
+    description: 'sdfsdfsd',
+  },
+}*/
 
 /***/ }),
 
@@ -48445,7 +48475,9 @@ var treeView = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48468,11 +48500,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+ // TODO use PureComponent instead
 
 var EditForm =
 /*#__PURE__*/
-function (_Component) {
-  _inherits(EditForm, _Component);
+function (_component) {
+  _inherits(EditForm, _component);
 
   function EditForm(props) {
     var _this;
@@ -48482,27 +48515,29 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditForm).call(this, props));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
+      var _this$setState;
+
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value;
 
-      _this.setState(_defineProperty({}, name, value));
+      _this.setState((_this$setState = {}, _defineProperty(_this$setState, name, value), _defineProperty(_this$setState, "cansave", value && value !== _this.props.node[name]), _this$setState));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function (event) {
       event.preventDefault();
       var _this$state = _this.state,
-          id = _this$state.id,
           name = _this$state.name,
           description = _this$state.description,
-          handleSave = _this.props.handleSave;
+          handleSave = _this.props.handleSave,
+          id = _this.props.node.id;
       handleSave(id, name, description);
     });
 
     _this.state = {
-      id: _this.props.node.id,
-      name: _this.props.node.name,
-      description: _this.props.node.description
+      name: "",
+      description: "",
+      cansave: false
     };
     return _this;
   }
@@ -48510,50 +48545,51 @@ function (_Component) {
   _createClass(EditForm, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          node = _this$props.node,
-          handleSave = _this$props.handleSave;
+      var node = this.props.node;
       var _this$state2 = this.state,
-          id = _this$state2.id,
           name = _this$state2.name,
-          description = _this$state2.description;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+          description = _this$state2.description,
+          cansave = _this$state2.cansave;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
         row: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
         className: "col-sm-1 col-form-label",
         for: "NodeName"
-      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         className: "col-sm-8 mr-3",
         type: "text",
         name: "name",
         id: "NodeName",
         placeholder: "Please enter name...",
-        value: name,
+        defaultValue: node.name,
         onChange: this.handleChange
-      }), name && (name != node.name || description != node.description) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      }), cansave && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         color: "primary"
-      }, "Save")), node.type == "file" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+      }, "Save")), node.type == "file" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
         row: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
         className: "col-sm-1 col-form-label",
         for: "NodeDscription"
-      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         className: "col-sm-8",
         type: "textarea",
         name: "description",
         id: "NodeDscription",
         placeholder: "Please enter description...",
-        value: description,
+        defaultValue: node.description,
         onChange: this.handleChange
       })));
     }
   }]);
 
   return EditForm;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["component"]);
 
+EditForm.propTypes = {
+  node: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
+};
 /* harmony default export */ __webpack_exports__["default"] = (EditForm);
 
 /***/ }),
@@ -48764,8 +48800,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -48807,11 +48841,18 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function (id, type, name, description) {
-      //console.log("handleSubmit: ", id, type, name, description)
-      _this.props.handleCreate(id, type, name, description);
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function (name, description) {
+      _this.props.handleCreate(_this.props.node.id, _this.state.newNodeType, name, description);
 
       _this.setNodeType(null);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSave", function (id, name, description) {
+      _this.props.handleSave(id, name, description);
+
+      _this.setState({
+        isEditing: false
+      });
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleCancel", function () {
@@ -48821,23 +48862,22 @@ function (_Component) {
       });
     });
 
-    _this.state = _objectSpread({}, props.node, {
+    _this.state = {
       newNodeType: null,
       isEditing: false
-    });
+    };
     return _this;
   }
 
   _createClass(SelectedNode, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({
-        id: nextProps.node.id,
-        name: nextProps.node.name,
-        description: nextProps.node.description,
-        newNodeType: null,
-        isEditing: false
-      });
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.node.id !== prevProps.node.id) {
+        this.setState({
+          newNodeType: null,
+          isEditing: false
+        });
+      }
     }
   }, {
     key: "render",
@@ -48846,20 +48886,15 @@ function (_Component) {
 
       var _this$props = this.props,
           node = _this$props.node,
-          handleDelete = _this$props.handleDelete,
-          handleSave = _this$props.handleSave;
+          handleDelete = _this$props.handleDelete;
       var _this$state = this.state,
-          id = _this$state.id,
           newNodeType = _this$state.newNodeType,
           isEditing = _this$state.isEditing;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, node && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, node.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, node.description), isEditing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_edit_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
         node: node,
-        handleSave: handleSave,
-        handleDelete: handleDelete,
-        setNodeType: this.setNodeType
+        handleSave: this.handleSave
       }), newNodeType && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_creation_form__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        type: newNodeType,
-        id: id,
+        nodeType: newNodeType,
         handleSubmit: this.handleSubmit
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"], null, node.children && !isEditing && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
         color: "light",
@@ -48875,7 +48910,7 @@ function (_Component) {
         color: "light",
         onClick: function onClick() {
           return _this2.setState({
-            isEditing: !isEditing
+            isEditing: true
           });
         }
       }, "Edit"), (isEditing || newNodeType) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -48998,17 +49033,18 @@ function (_Component) {
     });
 
     _this.state = {
-      treeView: _data__WEBPACK_IMPORTED_MODULE_1__["treeView"],
+      treeView: [],
       selectedNode: null
     };
     return _this;
   } // TODO add reset button or add folder into root
+  //TODO PureComponent , immutability, data normilize, redux
 
 
   _createClass(TreeView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var tree = this.getFromLocalStorage();
+      var tree = this.getFromLocalStorage() || _data__WEBPACK_IMPORTED_MODULE_1__["treeView"];
       tree && this.setState({
         treeView: tree
       });
@@ -49034,7 +49070,7 @@ function (_Component) {
       try {
         localStorage.setItem('treeView', JSON.stringify(this.state.treeView));
       } catch (e) {
-        if (this.isQuotaExceeded(e)) {
+        if (this.isStorageExceeded(e)) {
           console.error("Storage full, maybe notify user or do some clean-up");
         }
       }
