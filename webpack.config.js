@@ -8,12 +8,12 @@ module.exports = {
         path: path.join(__dirname, '/docs'),
         filename: 'index_bundle.js'
     },
-    // mode: 'development',
-    // devServer: {
-    //     contentBase: path.join(__dirname, 'docs'),
-    //     compress: false,
-    //     port: 3000
-    // },
+    mode: 'development',
+    devServer: {
+        contentBase: path.join(__dirname, 'docs'),
+        compress: false,
+        port: 3000
+    },
     module: {
         rules: [
             {
