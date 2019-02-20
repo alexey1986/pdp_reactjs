@@ -8,15 +8,18 @@ class TreeView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      treeView,
+      treeView: [],
       selectedNode: null
     };
   }
 
   // TODO add reset button or add folder into root
 
+  
+//TODO PureComponent , immutability, data normilize, redux
+
   componentDidMount() {
-    const tree = this.getFromLocalStorage();
+    const tree = this.getFromLocalStorage() || treeView;
     tree && this.setState({
       treeView: tree
     })

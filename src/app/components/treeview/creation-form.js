@@ -5,7 +5,6 @@ class CreationForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
             name: "",
             description: "",
             isNodeValid: true
@@ -14,7 +13,7 @@ class CreationForm extends Component {
 
     componentDidUpdate(prevProps) {
         /// reset validation and fields values
-        if (this.props.type !== prevProps.type) {
+        if (this.props.nodeType !== prevProps.nodeType) {
             this.setState({
                 name: "",
                 description: "",
@@ -32,22 +31,22 @@ class CreationForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const { type, handleSubmit } = this.props, { id, name, description } = this.state;
+        const { name, description } = this.state;
         // Validate name
         if (!name) {
             this.setState({isNodeValid: false});
             return;
         }
         // save
-        handleSubmit(id, type, name, description);
+        this.props.handleSubmit(name, description);
     }
 
     render() {
-        const { type } = this.props, { id, name, description, isNodeValid } = this.state;
+        const { nodeType } = this.props, { name, description, isNodeValid } = this.state;
 
         return (
             <fieldset className="mb-4">
-                <legend>Set new {type} name</legend>
+                <legend>Set new {nodeType} name</legend>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup row>
                         <div className="col-8">
@@ -56,7 +55,7 @@ class CreationForm extends Component {
                         {(name || description) && <Button color="primary">Submit</Button>}
                         {!isNodeValid && <div className="invalid-feedback">Please enter name</div>}
                     </FormGroup>
-                    {type == "file" && (
+                    {nodeType == "file" && (
                         <FormGroup>
                             <Input className="col-8" type="textarea" name="description" placeholder="Please enter description..." value={description} onChange={this.handleChange} />
                         </FormGroup>

@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
+import React, { component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class EditForm extends Component {
+// TODO use PureComponent instead
+class EditForm extends component {
     constructor(props) {
         super(props);
         this.state = {
             name: "",
-            description: ""
+            description: "",
+            cansave: false
         }
     }
 
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState({
-            [name]: value
+            [name]: value,
+            cansave: value && value !== this.props.node[name]
         });
     }
 
@@ -23,19 +26,20 @@ class EditForm extends Component {
         const {name, description } = this.state,
             { handleSave } = this.props,
             { id } = this.props.node;
+
         handleSave(id, name, description)
     }
 
     render() {
         const { node } = this.props;
-        const { name, description } = this.state;
+        const { name, description, cansave } = this.state;
 
         return (
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeName">Name</Label>
                     <Input className="col-sm-8 mr-3" type="text" name="name" id="NodeName" placeholder="Please enter name..." defaultValue={node.name} onChange={this.handleChange} />
-                    {(name && (name != node.name || description != node.description)) && <Button color="primary">Save</Button>}
+                    {cansave && <Button color="primary">Save</Button>}
                 </FormGroup>
                 {node.type == "file" && <FormGroup row>
                     <Label className="col-sm-1 col-form-label" for="NodeDscription">Description</Label>
