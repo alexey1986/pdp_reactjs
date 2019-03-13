@@ -6,17 +6,17 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
-    render() {
-      return (
-        <Router>
-            <div>
-                <NavBar />
-                <Route path='/articles' component={Articles}/>
-                <Route path='/tree' component={TreeView}/>
-            </div>
-        </Router>
-      )
-    }
+  render() {
+    return (
+      <Router>
+          <div>
+              <NavBar />
+              <Route path='/articles' component={Articles}/>
+              <Route path='/tree' component={TreeView}/>
+          </div>
+      </Router>
+    )
   }
-  
+}
+
 export default App;

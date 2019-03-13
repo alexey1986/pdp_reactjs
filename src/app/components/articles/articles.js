@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import NewsAPI from 'newsapi';
 import { DebounceInput } from 'react-debounce-input';
 import ArticlesList from './articles-list';
@@ -8,7 +8,7 @@ import '../assets/styles/components/articles.css';
 
 const API_KEY = new NewsAPI('204141cf2b5443618d7531afb82b6bac');
 
-class Articles extends Component {
+class Articles extends PureComponent {
   state = {
     articles: [],
     category: '',
@@ -17,7 +17,7 @@ class Articles extends Component {
   
   handleChangeCategory = e => {
     const category = e.target.innerText.toLowerCase();
-    this.getNews(category)
+    this.state.category !== category && this.getNews(category)
       .then(() => {
         this.selectFirstArticle();
         this.setState({ category: category});
