@@ -47634,8 +47634,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
-var Article = function Article(_ref) {
+var Article = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   var article = _ref.article,
       handleClick = _ref.handleClick;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -47648,8 +47647,7 @@ var Article = function Article(_ref) {
     src: article.urlToImage,
     alt: article.source.name
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, article.description));
-};
-
+});
 /* harmony default export */ __webpack_exports__["default"] = (Article);
 
 /***/ }),
@@ -47668,8 +47666,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _article__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./article */ "./src/app/components/articles/article.js");
 
 
-
-var ArticlesList = function ArticlesList(_ref) {
+var ArticlesList = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   var articles = _ref.articles,
       handleClick = _ref.handleClick;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -47682,8 +47679,7 @@ var ArticlesList = function ArticlesList(_ref) {
       handleClick: handleClick
     }));
   }));
-};
-
+});
 /* harmony default export */ __webpack_exports__["default"] = (ArticlesList);
 
 /***/ }),
@@ -47739,8 +47735,8 @@ var API_KEY = new newsapi__WEBPACK_IMPORTED_MODULE_1___default.a('204141cf2b5443
 
 var Articles =
 /*#__PURE__*/
-function (_Component) {
-  _inherits(Articles, _Component);
+function (_PureComponent) {
+  _inherits(Articles, _PureComponent);
 
   function Articles() {
     var _getPrototypeOf2;
@@ -47763,8 +47759,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChangeCategory", function (e) {
       var category = e.target.innerText.toLowerCase();
-
-      _this.getNews(category).then(function () {
+      _this.state.category !== category && _this.getNews(category).then(function () {
         _this.selectFirstArticle();
 
         _this.setState({
@@ -47874,7 +47869,7 @@ function (_Component) {
   }]);
 
   return Articles;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Articles);
 
@@ -47922,8 +47917,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var CATEGORIES = ["business", "entertainment", "general", "health", "science", "sports", "technology"];
-
-var Categories = function Categories(_ref) {
+var Categories = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   var handleClick = _ref.handleClick;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Chose category:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "btn-group btn-group-sm mb-3",
@@ -47935,8 +47929,7 @@ var Categories = function Categories(_ref) {
       handleClick: handleClick
     });
   })));
-};
-
+});
 /* harmony default export */ __webpack_exports__["default"] = (Categories);
 
 /***/ }),
@@ -47956,8 +47949,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-var SelectedArticle = function SelectedArticle(_ref) {
+var SelectedArticle = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   var article = _ref.article;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, article ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, article.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Source: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: article.url
@@ -47966,8 +47958,7 @@ var SelectedArticle = function SelectedArticle(_ref) {
     src: article.urlToImage,
     alt: article.source.name
   })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Please chose any article..."));
-};
-
+});
 SelectedArticle.propTypes = {
   article: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
 };
@@ -48151,64 +48142,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
-var NavBar =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(NavBar, _Component);
-
-  function NavBar() {
-    _classCallCheck(this, NavBar);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(NavBar).apply(this, arguments));
-  }
-
-  _createClass(NavBar, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-light"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "navbar-nav"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/articles",
-        className: "nav-link",
-        activeClassName: "active"
-      }, "Articles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        to: "/tree",
-        className: "nav-link",
-        activeClassName: "active"
-      }, "Tree View"))));
-    }
-  }]);
-
-  return NavBar;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
+var NavBar = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function () {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    className: "navbar navbar-expand-lg navbar-light bg-light"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "navbar-nav"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    to: "/articles",
+    className: "nav-link",
+    activeClassName: "active"
+  }, "Articles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    to: "/tree",
+    className: "nav-link",
+    activeClassName: "active"
+  }, "Tree View"))));
+});
 /* harmony default export */ __webpack_exports__["default"] = (NavBar);
 
 /***/ }),
@@ -48440,9 +48394,7 @@ var treeView = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48464,13 +48416,12 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-
  // TODO use PureComponent instead
 
 var EditForm =
 /*#__PURE__*/
-function (_component) {
-  _inherits(EditForm, _component);
+function (_Component) {
+  _inherits(EditForm, _Component);
 
   function EditForm(props) {
     var _this;
@@ -48480,13 +48431,11 @@ function (_component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EditForm).call(this, props));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleChange", function (event) {
-      var _this$setState;
-
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value;
 
-      _this.setState((_this$setState = {}, _defineProperty(_this$setState, name, value), _defineProperty(_this$setState, "cansave", value && value !== _this.props.node[name]), _this$setState));
+      _this.setState(_defineProperty({}, name, value));
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSubmit", function (event) {
@@ -48501,8 +48450,7 @@ function (_component) {
 
     _this.state = {
       name: "",
-      description: "",
-      cansave: false
+      description: ""
     };
     return _this;
   }
@@ -48513,16 +48461,15 @@ function (_component) {
       var node = this.props.node;
       var _this$state2 = this.state,
           name = _this$state2.name,
-          description = _this$state2.description,
-          cansave = _this$state2.cansave;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+          description = _this$state2.description;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
         row: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         className: "col-sm-1 col-form-label",
         for: "NodeName"
-      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         className: "col-sm-8 mr-3",
         type: "text",
         name: "name",
@@ -48530,14 +48477,12 @@ function (_component) {
         placeholder: "Please enter name...",
         defaultValue: node.name,
         onChange: this.handleChange
-      }), cansave && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-        color: "primary"
-      }, "Save")), node.type == "file" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], {
+      })), node.type == "file" && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
         row: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         className: "col-sm-1 col-form-label",
         for: "NodeDscription"
-      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         className: "col-sm-8",
         type: "textarea",
         name: "description",
@@ -48550,11 +48495,8 @@ function (_component) {
   }]);
 
   return EditForm;
-}(react__WEBPACK_IMPORTED_MODULE_0__["component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-EditForm.propTypes = {
-  node: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object.isRequired
-};
 /* harmony default export */ __webpack_exports__["default"] = (EditForm);
 
 /***/ }),
