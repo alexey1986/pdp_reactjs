@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import { treeView } from "./data";
-import FileTree from './file-tree';
-import SelectedNode from './selected-node';
-import '../assets/styles/components/treeview.css';
+import { treeView } from "treeview/data";
+import FileTree from 'treeview/file-tree';
+import SelectedNode from 'treeview/selected-node';
+import 'assets/styles/components/treeview.css';
 
 class TreeView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      treeView: [],
+      treeView: {},
       selectedNode: null
     };
   }
 
   // TODO add reset button or add folder into root
 
-  
+
 //TODO PureComponent , immutability, data normilize, redux
 
   componentDidMount() {
     const tree = this.getFromLocalStorage() || treeView;
-    tree && this.setState({
-      treeView: tree
+    this.setState({
+      treeView: {...tree}
     })
   }
 
@@ -85,11 +85,13 @@ class TreeView extends Component {
   }
 
   updateTree(newTree) {
-    this.setState({treeView: newTree},
+    this.setState(state => ({
+        treeView: state.treeView.children.concat(newTree)
+      }),
       this.saveToLocalStorage
     );
   }
-  
+
   handleSelectNode = (e, selected) => {
     e.stopPropagation();
     this.setState({
@@ -98,7 +100,9 @@ class TreeView extends Component {
   }
 
   handleSave = (id, name, description) => {
-    const newArray = this.state.treeView, currentNode = this.findNode(newArray.children, id);
+    const newArray = this.state.treeView,
+          currentNode = this.findNode(newArray.children, id);
+
     currentNode.name = name;
     currentNode.description = description;
     this.updateTree(newArray);
@@ -128,7 +132,7 @@ class TreeView extends Component {
   }
 
   removeNode(parent, childToRemove) {
-    if (parent.children) { 
+    if (parent.children) {
         parent.children = parent.children
         .filter(child => child.id !== childToRemove)
         .map(child => this.removeNode(child, childToRemove));

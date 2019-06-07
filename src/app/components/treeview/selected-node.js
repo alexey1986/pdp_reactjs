@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import EditForm from './edit-form';
-import CreationForm from './creation-form';
+import EditForm from 'treeview/edit-form';
+import CreationForm from 'treeview/creation-form';
 import { Button, ButtonGroup } from 'reactstrap';
 
 class SelectedNode extends Component {

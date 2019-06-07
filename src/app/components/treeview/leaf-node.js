@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import IconFile from '../assets/icons/file';
-import IconFolder from '../assets/icons/folder';
+import IconFile from 'assets/icons/file';
+import IconFolder from 'assets/icons/folder';
 
 class LeafNode extends Component {
   constructor(props) {

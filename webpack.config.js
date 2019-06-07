@@ -6,13 +6,23 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.join(__dirname, '/docs'),
+        publicPath: '/',
         filename: 'index_bundle.js'
     },
     mode: 'development',
     devServer: {
         contentBase: path.join(__dirname, 'docs'),
         compress: false,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
+    },
+    resolve: {
+        alias: {
+            components: path.resolve(__dirname, 'src/app/components/'),
+            articles: path.resolve(__dirname, 'src/app/components/articles/'),
+            treeview: path.resolve(__dirname, 'src/app/components/treeview/'),
+            assets: path.resolve(__dirname, 'src/app/components/assets/')
+        },
     },
     module: {
         rules: [

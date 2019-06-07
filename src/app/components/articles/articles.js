@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import NewsAPI from 'newsapi';
 import { DebounceInput } from 'react-debounce-input';
-import ArticlesList from './articles-list';
-import SelectedArticle from './selected-article';
-import Categories from './categories';
-import '../assets/styles/components/articles.css';
+import ArticlesList from 'articles/articles-list';
+import SelectedArticle from 'articles/selected-article';
+import Categories from 'articles/categories';
+import 'assets/styles/components/articles.css';
 
 const API_KEY = new NewsAPI('204141cf2b5443618d7531afb82b6bac');
 
@@ -14,7 +14,7 @@ class Articles extends PureComponent {
     category: '',
     isLoading: true
   }
-  
+
   handleChangeCategory = e => {
     const category = e.target.innerText.toLowerCase();
     this.state.category !== category && this.getNews(category)
@@ -41,23 +41,27 @@ class Articles extends PureComponent {
     this.selectArticle(this.state.articles[0]);
   }
 
-  getNews(category, q) {
-    return API_KEY.v2.topHeadlines({
+  rewriteData = (data) => {
+    this.setState({
+      articles: data
+    });
+  }
+
+  getNews = (category, q) => (
+    API_KEY.v2.topHeadlines({
       country: 'us',
       category: category || '',
       q: q || '' // keywords or a phrase to search for
     })
     .then(response => {
-        this.setState({
-          articles: response.articles
-        });
+        this.rewriteData(response.articles)
       }
     )
-    .catch((this.errorHandler));
-  }
+    .catch((this.errorHandler))
+  )
 
   errorHandler(error) {
-    console.error(error);
+    throw new Error(error);
   }
 
   componentDidMount() {
@@ -70,7 +74,7 @@ class Articles extends PureComponent {
       })
       .catch((this.errorHandler));
   }
-  
+
   render() {
     const { articles, article, isLoading } = this.state;
 
@@ -98,7 +102,7 @@ class Articles extends PureComponent {
                 minLength={2}
                 debounceTimeout={300}
                 onChange={this.handleSearchByKeyWord} />
-            </div>            
+            </div>
             {/* articles list */}
             <ArticlesList articles={articles} handleClick={this.selectArticle} />
           </aside>
@@ -106,7 +110,7 @@ class Articles extends PureComponent {
             <SelectedArticle article={article} />
           </div>
         </div>
-      </div>  
+      </div>
     )
   }
 }

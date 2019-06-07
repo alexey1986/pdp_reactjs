@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LeafNode from './leaf-node';
+import LeafNode from 'treeview/leaf-node';
 
 class FileTree extends Component {
   render() {
